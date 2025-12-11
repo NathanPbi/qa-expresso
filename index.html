@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Notion Tree - QA</title>
+<style>
+/* ====== Estilo da Tree estilo Notion ====== */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  padding: 20px;
+  background: #fafafa;
+}
+
+.n-tree {
+  line-height: 1.5;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.n-node {
+  margin: 6px 0;
+}
+
+.n-header {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  padding: 4px 0;
+}
+
+.n-arrow {
+  width: 22px;
+  font-size: 16px;
+  text-align: center;
+  margin-right: 6px;
+  transition: transform 0.15s ease;
+}
+
+.n-title {
+  font-weight: 600;
+}
+
+.n-content {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.25s ease, opacity 0.25s ease;
+  padding-left: 28px;
+}
+
+.n-content.open {
+  max-height: 5000px;
+  opacity: 1;
+}
+
+.n-edit {
+  padding: 6px 0;
+}
+
+/* Deixe tudo editável e com visual limpo */
+[contenteditable="true"] {
+  outline: none;
+}
+
+</style>
+</head>
+<body>
+
+<h1 contenteditable="true">Instruções de Trabalho - QA</h1>
+
+<div class="n-tree">
+
+  <!-- BLOCO 1 -->
+  <div class="n-node">
+    <div class="n-header">
+      <div class="n-arrow">▸</div>
+      <div class="n-title" contenteditable="true">Módulo 1</div>
+    </div>
+    <div class="n-content">
+      <div class="n-edit" contenteditable="true">
+        Escreva aqui o conteúdo do módulo…
+      </div>
+
+      <!-- Subnível -->
+      <div class="n-node">
+        <div class="n-header">
+          <div class="n-arrow">▸</div>
+          <div class="n-title" contenteditable="true">Subtópico</div>
+        </div>
+        <div class="n-content">
+          <div class="n-edit" contenteditable="true">
+            Conteúdo do subtópico…
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BLOCO 2 -->
+  <div class="n-node">
+    <div class="n-header">
+      <div class="n-arrow">▸</div>
+      <div class="n-title" contenteditable="true">Módulo 2</div>
+    </div>
+    <div class="n-content">
+      <div class="n-edit" contenteditable="true">
+        Conteúdo editável do módulo 2…
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+/* ===== Script Notion-like Tree ===== */
+document.querySelectorAll('.n-header').forEach(header => {
+  header.addEventListener('click', () => {
+    const content = header.nextElementSibling;
+    const arrow = header.querySelector('.n-arrow');
+
+    if (!content.classList.contains('open')) {
+      content.classList.add('open');
+      arrow.textContent = '▾';
+    } else {
+      content.classList.remove('open');
+      arrow.textContent = '▸';
+    }
+  });
+});
+</script>
+
+</body>
+</html>
